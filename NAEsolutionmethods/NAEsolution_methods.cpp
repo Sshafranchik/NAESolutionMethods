@@ -36,7 +36,6 @@ double BisectionMethod(double a, double b, double epsilon) {
     return c;
 }
 
-// Ìåòîä õîðä
 double SecantMethod(double a, double b, double epsilon) {
     double c;
     while (fabs(b - a) >= epsilon) {
@@ -47,7 +46,6 @@ double SecantMethod(double a, double b, double epsilon) {
     return c;
 }
 
-// Ìåòîä äîòè÷íèõ (ìåòîä Íüþòîíà)
 double NewtonMethod(double x0, double epsilon) {
     double h = nonlinearFunction(x0) / derivativeFunction(x0);
     while (fabs(h) >= epsilon) {
@@ -57,7 +55,6 @@ double NewtonMethod(double x0, double epsilon) {
     return x0;
 }
 
-// Ìåòîä õîðä-äîòè÷íèõ (çì³øàíèé ìåòîä)
 double Secant_NewtonMethod(double a, double b, double epsilon) {
     double c;
     while (fabs(b - a) >= epsilon) {
