@@ -10,17 +10,15 @@ double nonlinearFunction(double x) {
 double derivativeFunction(double x) {
     return 3 * x * x - 2;
 }
-// Ìåòîä ïåðåáîðó
 double PickingMethod(double a, double b, double step, double epsilon) {
     for (double x = a; x <= b; x += step) {
         if (fabs(nonlinearFunction(x)) < epsilon) {
             return x;
         }
     }
-    return a; // ßêùî ðîçâ'ÿçîê íå çíàéäåíî, ïîâåðòàºìî ïî÷àòêîâå çíà÷åííÿ
+    return a; // Якщо розв'язок не знайдено, повертаємо початкове значення
 }
 
-// Ìåòîä ïîëîâèííîãî ä³ëåííÿ (á³ñåêö³¿)
 double BisectionMethod(double a, double b, double epsilon) {
     double c;
     while ((b - a) >= epsilon) {
