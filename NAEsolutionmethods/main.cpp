@@ -1,10 +1,8 @@
-// NAEsolutionmethods.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
 #include "NAEsol_met.h"
 #include <iostream>
 #include <cmath>
 #include <chrono>
-#include <iomanip> // Для використання fixed і setprecision
+#include <iomanip> 
 
 using namespace std;
 using namespace std::chrono;
@@ -13,58 +11,52 @@ using namespace std::chrono;
 int main() {
     setlocale(LC_ALL, "ukr");
     double a, b, step, epsilon; int maxiterations = 1000;
-    cout << "Введіть початкове значення інтервалу a: ";
+    cout << "Р’РІРµРґС–С‚СЊ РїРѕС‡Р°С‚РєРѕРІРµ Р·РЅР°С‡РµРЅРЅСЏ С–РЅС‚РµСЂРІР°Р»Сѓ a: ";
     cin >> a;
-    cout << "Введіть кінцеве значення інтервалу b: ";
+    cout << "Р’РІРµРґС–С‚СЊ РєС–РЅС†РµРІРµ Р·РЅР°С‡РµРЅРЅСЏ С–РЅС‚РµСЂРІР°Р»Сѓ b: ";
     cin >> b;
-    cout << "Введіть крок для методу перебору: ";
+    cout << "Р’РІРµРґС–С‚СЊ РєСЂРѕРє РґР»СЏ РјРµС‚РѕРґСѓ РїРµСЂРµР±РѕСЂСѓ: ";
     cin >> step;
-    cout << "Введіть точність epsilon: ";
+    cout << "Р’РІРµРґС–С‚СЊ С‚РѕС‡РЅС–СЃС‚СЊ epsilon: ";
     cin >> epsilon;
 
-    // Метод перебору
     auto start = steady_clock::now();
     double root1 = PickingMethod(a, b, step, epsilon);
     auto end = steady_clock::now();
     auto time1 = duration_cast<duration<double>>(end - start);
 
-    // Метод половинного ділення (бісекції)
     start = steady_clock::now();
     double root2 = BisectionMethod(a, b, epsilon);
     end = steady_clock::now();
     auto time2 = duration_cast<duration<double>>(end - start);
 
-    // Метод хорд
     start = steady_clock::now();
     double root3 = SecantMethod(a, b, epsilon);
     end = steady_clock::now();
     auto time3 = duration_cast<duration<double>>(end - start);
 
-    // Метод дотичних (метод Ньютона)
     start = steady_clock::now();
     double root4 = NewtonMethod((a + b) / 2, epsilon);
     end = steady_clock::now();
     auto time4 = duration_cast<duration<double>>(end - start);
 
-    // Метод хорд-дотичних
     start = steady_clock::now();
     double root5 = Secant_NewtonMethod(a, b, epsilon);
     end = steady_clock::now();
     auto time5 = duration_cast<duration<double>>(end - start);
 
-    // Метод ітерацій
     start = steady_clock::now();
     double root6 = IterationsMethod((a + b) / 2, epsilon,maxiterations);
     end = steady_clock::now();
     auto time6 = duration_cast<duration<double>>(end - start);
 
-    cout << fixed << setprecision(10);//std::fixed встановлює фіксований формат для чисел з плаваючою точкою. //
-    cout << "Метод перебору: корінь = " << root1 << ", час = " << time1.count() << " секунд" << endl;
-    cout << "Метод половинного ділення: корінь = " << root2 << ", час = " << time2.count() << " секунд" << endl;
-    cout << "Метод хорд: корінь = " << root3 << ", час = " << time3.count() << " секунд" << endl;
-    cout << "Метод дотичних (метод Ньютона): корінь = " << root4 << ", час = " << time4.count() << " секунд" << endl;
-    cout << "Метод хорд-дотичних: корінь = " << root5 << ", час = " << time5.count() << " секунд" << endl;
-    cout << "Метод ітерацій: корінь = " << root6 << ", час = " << time6.count() << " секунд" << endl;
+    cout << fixed << setprecision(10);//std::fixed РІСЃС‚Р°РЅРѕРІР»СЋС” С„С–РєСЃРѕРІР°РЅРёР№ С„РѕСЂРјР°С‚ РґР»СЏ С‡РёСЃРµР» Р· РїР»Р°РІР°СЋС‡РѕСЋ С‚РѕС‡РєРѕСЋ. //
+    cout << "РњРµС‚РѕРґ РїРµСЂРµР±РѕСЂСѓ: РєРѕСЂС–РЅСЊ = " << root1 << ", С‡Р°СЃ = " << time1.count() << " СЃРµРєСѓРЅРґ" << endl;
+    cout << "РњРµС‚РѕРґ РїРѕР»РѕРІРёРЅРЅРѕРіРѕ РґС–Р»РµРЅРЅСЏ: РєРѕСЂС–РЅСЊ = " << root2 << ", С‡Р°СЃ = " << time2.count() << " СЃРµРєСѓРЅРґ" << endl;
+    cout << "РњРµС‚РѕРґ С…РѕСЂРґ: РєРѕСЂС–РЅСЊ = " << root3 << ", С‡Р°СЃ = " << time3.count() << " СЃРµРєСѓРЅРґ" << endl;
+    cout << "РњРµС‚РѕРґ РґРѕС‚РёС‡РЅРёС… (РјРµС‚РѕРґ РќСЊСЋС‚РѕРЅР°): РєРѕСЂС–РЅСЊ = " << root4 << ", С‡Р°СЃ = " << time4.count() << " СЃРµРєСѓРЅРґ" << endl;
+    cout << "РњРµС‚РѕРґ С…РѕСЂРґ-РґРѕС‚РёС‡РЅРёС…: РєРѕСЂС–РЅСЊ = " << root5 << ", С‡Р°СЃ = " << time5.count() << " СЃРµРєСѓРЅРґ" << endl;
+    cout << "РњРµС‚РѕРґ С–С‚РµСЂР°С†С–Р№: РєРѕСЂС–РЅСЊ = " << root6 << ", С‡Р°СЃ = " << time6.count() << " СЃРµРєСѓРЅРґ" << endl;
 
     double minTime = time1.count();
     minTime = min(minTime, time2.count());
@@ -73,7 +65,6 @@ int main() {
     minTime = min(minTime, time5.count());
     minTime = min(minTime, time6.count());
     cout << endl;
-    cout << "Найменший час виконання: " << minTime << " секунд" << endl;
+    cout << "РќР°Р№РјРµРЅС€РёР№ С‡Р°СЃ РІРёРєРѕРЅР°РЅРЅСЏ: " << minTime << " СЃРµРєСѓРЅРґ" << endl;
 
     return 0;
-}
