@@ -1,27 +1,27 @@
 #include "NAEsol_met.h"
 #include <iostream>
 using namespace std;
-// Функція, для якої ми шукаємо корені
+// Г”ГіГ­ГЄГ¶ВіГї, Г¤Г«Гї ГїГЄГ®Вї Г¬ГЁ ГёГіГЄГ ВєГ¬Г® ГЄГ®Г°ГҐГ­Ві
 double nonlinearFunction(double x) {
     return x * x * x - 2 * x - 5;
 }
 
-// Похідна функції для методу дотичних (метод Ньютона)
+// ГЏГ®ГµВіГ¤Г­Г  ГґГіГ­ГЄГ¶ВіВї Г¤Г«Гї Г¬ГҐГІГ®Г¤Гі Г¤Г®ГІГЁГ·Г­ГЁГµ (Г¬ГҐГІГ®Г¤ ГЌГјГѕГІГ®Г­Г )
 double derivativeFunction(double x) {
     return 3 * x * x - 2;
 }
 
-// Метод перебору
+// ГЊГҐГІГ®Г¤ ГЇГҐГ°ГҐГЎГ®Г°Гі
 double PickingMethod(double a, double b, double step, double epsilon) {
     for (double x = a; x <= b; x += step) {
         if (fabs(nonlinearFunction(x)) < epsilon) {
             return x;
         }
     }
-    return a; // Якщо розв'язок не знайдено, повертаємо початкове значення
+    return a; // ГџГЄГ№Г® Г°Г®Г§Гў'ГїГ§Г®ГЄ Г­ГҐ Г§Г­Г Г©Г¤ГҐГ­Г®, ГЇГ®ГўГҐГ°ГІГ ВєГ¬Г® ГЇГ®Г·Г ГІГЄГ®ГўГҐ Г§Г­Г Г·ГҐГ­Г­Гї
 }
 
-// Метод половинного ділення (бісекції)
+// ГЊГҐГІГ®Г¤ ГЇГ®Г«Г®ГўГЁГ­Г­Г®ГЈГ® Г¤ВіГ«ГҐГ­Г­Гї (ГЎВіГ±ГҐГЄГ¶ВіВї)
 double BisectionMethod(double a, double b, double epsilon) {
     double c;
     while ((b - a) >= epsilon) {
@@ -36,7 +36,7 @@ double BisectionMethod(double a, double b, double epsilon) {
     return c;
 }
 
-// Метод хорд
+// ГЊГҐГІГ®Г¤ ГµГ®Г°Г¤
 double SecantMethod(double a, double b, double epsilon) {
     double c;
     while (fabs(b - a) >= epsilon) {
@@ -47,7 +47,7 @@ double SecantMethod(double a, double b, double epsilon) {
     return c;
 }
 
-// Метод дотичних (метод Ньютона)
+// ГЊГҐГІГ®Г¤ Г¤Г®ГІГЁГ·Г­ГЁГµ (Г¬ГҐГІГ®Г¤ ГЌГјГѕГІГ®Г­Г )
 double NewtonMethod(double x0, double epsilon) {
     double h = nonlinearFunction(x0) / derivativeFunction(x0);
     while (fabs(h) >= epsilon) {
@@ -57,7 +57,7 @@ double NewtonMethod(double x0, double epsilon) {
     return x0;
 }
 
-// Метод хорд-дотичних (змішаний метод)
+// ГЊГҐГІГ®Г¤ ГµГ®Г°Г¤-Г¤Г®ГІГЁГ·Г­ГЁГµ (Г§Г¬ВіГёГ Г­ГЁГ© Г¬ГҐГІГ®Г¤)
 double Secant_NewtonMethod(double a, double b, double epsilon) {
     double c;
     while (fabs(b - a) >= epsilon) {
@@ -72,17 +72,16 @@ double Secant_NewtonMethod(double a, double b, double epsilon) {
     return c;
 }
 
-// Метод ітерацій (простих ітерацій)
 double IterationsMethod(double x0, double epsilon, int maxiterations) {
     double x1; int iterations = 0;
     while (true) {
-        x1 = x0 - 0.01 * nonlinearFunction(x0); // lambda = 0.01 - крок ітерації
+        x1 = x0 - 0.01 * nonlinearFunction(x0); // lambda = 0.01 - РєСЂРѕРє С–С‚РµСЂР°С†С–С—
         if (fabs(x1 - x0) < epsilon)
             break;
         x0 = x1;
         iterations++;
         if (iterations >= maxiterations) {
-            cout << "Досягнуто максимальну кількість ітерацій" << std::endl;
+            cout << "Р”РѕСЃСЏРіРЅСѓС‚Рѕ РјР°РєСЃРёРјР°Р»СЊРЅСѓ РєС–Р»СЊРєС–СЃС‚СЊ С–С‚РµСЂР°С†С–Р№" << std::endl;
             break;
         }
     }
