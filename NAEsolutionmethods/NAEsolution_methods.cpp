@@ -1,16 +1,15 @@
 #include "NAEsol_met.h"
 #include <iostream>
 using namespace std;
-// Ôóíêö³ÿ, äëÿ ÿêî¿ ìè øóêàºìî êîðåí³
+// Функція, для якої ми шукаємо корені
 double nonlinearFunction(double x) {
     return x * x * x - 2 * x - 5;
 }
 
-// Ïîõ³äíà ôóíêö³¿ äëÿ ìåòîäó äîòè÷íèõ (ìåòîä Íüþòîíà)
+// Похідна функції для методу дотичних (метод Ньютона)
 double derivativeFunction(double x) {
     return 3 * x * x - 2;
 }
-
 // Ìåòîä ïåðåáîðó
 double PickingMethod(double a, double b, double step, double epsilon) {
     for (double x = a; x <= b; x += step) {
